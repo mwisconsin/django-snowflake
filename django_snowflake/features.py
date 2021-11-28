@@ -9,6 +9,14 @@ class DatabaseFeatures(BaseDatabaseFeatures):
     # This should be InterfaceError:
     # https://github.com/snowflakedb/snowflake-connector-python/issues/943
     closed_cursor_error_class = DatabaseError
+    create_test_procedure_without_params_sql = """
+        CREATE PROCEDURE test_procedure() RETURNS varchar LANGUAGE JAVASCRIPT AS $$
+           var i = 1;
+    $$"""
+    create_test_procedure_with_int_param_sql = """
+        CREATE OR REPLACE PROCEDURE test_procedure (P_I float) RETURNS varchar LANGUAGE JAVASCRIPT AS $$
+            var i = P_I;
+    $$"""
     # This feature is specific to the Django fork used for testing.
     enforces_foreign_key_constraints = False
     # This feature is specific to the Django fork used for testing.
